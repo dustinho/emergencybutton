@@ -6,7 +6,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-static emergencybutton_loglevel emergencybutton_current_loglevel = EMERGENCYBUTTON_LOG_DEBUG;
+static emergencybutton_loglevel emergencybutton_current_loglevel = EMERGENCYBUTTON_LOG_ERROR;
 
 emergencybutton_handle* emergencybutton_open() {
 	struct hid_device_info *devs, *cur_dev;
@@ -42,6 +42,7 @@ button_state emergencybutton_poll(emergencybutton_handle* dev) {
 	EB_DEBUG("emergencybutton_poll entered\n");
 	int res = 0;
 	unsigned char data[256];
+reenter:
 	data[0] = 0;
 	data[1] = 0;
 	data[2] = 0;
@@ -56,7 +57,10 @@ button_state emergencybutton_poll(emergencybutton_handle* dev) {
 	EB_DEBUG("Sent OUT report, %d bytes sent\n", res);
 
 	EB_DEBUG("About to request report IN\n");
-	res = hid_read(dev->dev, data, 8);
+	res = hid_read_timeout(dev->dev, data, 8, 100);
+	if (res != 8) {
+		goto reenter;
+	}
 	EB_DEBUG("Got report IN: %d bytes:", res);
 	int i;
 	for(i = 0 ; i < res ; i++) {
