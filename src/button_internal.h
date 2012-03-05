@@ -2,7 +2,7 @@
 #include "hidapi.h"
 
 typedef struct emergencybutton_handle_ {
-	struct hid_device* dev;
+	hid_device* dev;
 } emergencybutton_handle_;
 
 typedef enum {
