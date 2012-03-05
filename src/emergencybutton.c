@@ -12,18 +12,22 @@ emergencybutton_handle* emergencybutton_open() {
 	struct hid_device_info *devs, *cur_dev;
 	hid_device* handle = NULL;
 
-	devs = hid_enumerate(0x0, 0x0);
-	cur_dev = devs;
-	while(cur_dev) {
-		EB_DEBUG("Device Found\n  type: %04hx %04hx\n  path: %s\n  serial_number: %ls",
-		cur_dev->vendor_id, cur_dev->product_id, cur_dev->path, cur_dev->serial_number);
-		EB_DEBUG("\n");
-		EB_DEBUG("  Manufacturer: %ls\n", cur_dev->manufacturer_string);
-		EB_DEBUG("  Product:      %ls\n", cur_dev->product_string);
-		EB_DEBUG("\n");
-		cur_dev = cur_dev->next;
+	// Enumerate if debug is enabled
+	if (emergencybutton_current_loglevel >= EMERGENCYBUTTON_LOG_DEBUG) {
+		devs = hid_enumerate(0x0, 0x0);
+		cur_dev = devs;
+		while(cur_dev) {
+			EB_DEBUG("Device Found\n  type: %04hx %04hx\n  path: %s\n  serial_number: %ls",
+			cur_dev->vendor_id, cur_dev->product_id, cur_dev->path, cur_dev->serial_number);
+			EB_DEBUG("\n");
+			EB_DEBUG("  Manufacturer: %ls\n", cur_dev->manufacturer_string);
+			EB_DEBUG("  Product:      %ls\n", cur_dev->product_string);
+			EB_DEBUG("\n");
+			cur_dev = cur_dev->next;
+		}
+		hid_free_enumeration(devs);
 	}
-	hid_free_enumeration(devs);
+
 	// Try opening the device
 	handle = hid_open(0x1d34, 0x000d, NULL);
 	if (!handle) {
