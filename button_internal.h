@@ -1,3 +1,6 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 #include "hidapi.h"
 
@@ -29,3 +32,6 @@ void eb_log(emergencybutton_loglevel level, const char *fmt, ...);
 #define EB_SPEW(...) EB_LOG(EMERGENCYBUTTON_LOG_SPEW, __VA_ARGS__)
 #define EB_FLOOD(...) EB_LOG(EMERGENCYBUTTON_LOG_FLOOD, __VA_ARGS__)
 
+#ifdef __cplusplus
+}
+#endif

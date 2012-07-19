@@ -1,3 +1,7 @@
+#ifdef __cplusplus
+extern "C" {
+#endif
+
 // Opaque struct
 struct emergencybutton_handle_;
 typedef struct emergencybutton_handle_ emergencybutton_handle;
@@ -11,3 +15,7 @@ typedef enum {
 emergencybutton_handle* emergencybutton_open();
 button_state emergencybutton_poll(emergencybutton_handle*);
 void emergencybutton_close(emergencybutton_handle*);
+
+#ifdef __cplusplus
+}
+#endif

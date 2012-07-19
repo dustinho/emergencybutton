@@ -1,5 +1,5 @@
 #include "button_internal.h"
-#include <libemergencybutton/emergencybutton.h>
+#include "emergencybutton.h"
 #include "hidapi.h"
 #include <stdio.h>
 #include <stdarg.h>
