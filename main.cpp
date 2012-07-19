@@ -1,5 +1,4 @@
 #include "emergencybutton.h"
-#include "lib/libircclient/include/libircclient.h"
 #include <stdio.h>
 #include <unistd.h>
 #include <vector>
