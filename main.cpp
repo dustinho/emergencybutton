@@ -1,6 +1,8 @@
-#include <libemergencybutton/emergencybutton.h>
+#include "emergencybutton.h"
 #include <stdio.h>
 #include <unistd.h>
+
+#include <vector>
 
 int main(void) {
 	button_state last_state = (button_state)-1;
