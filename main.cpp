@@ -21,6 +21,7 @@ int main(void) {
 					break;
 				case BUTTON_PRESSED:
 					printf("Button is pressed OH NO!\n");
+					system("cd noises; ./button_push.sh &");
 					break;
 			}
 		}
