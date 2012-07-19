@@ -21,7 +21,7 @@ int main(void) {
       case BUTTON_PRESSED:
 	printf("Button is pressed OH NO!\n");
 	system("cd noises; ./button_push.sh &");
-	system("cd irc; python yell_in_irc.py '#si' 'SI IS TAKING DOWN THE SITE NOW'&");
+	system("cd irc; python yell_in_irc.py '#si' 'si_e SI IS TAKING DOWN THE SITE NOW'&");
 	break;
       }
     }
