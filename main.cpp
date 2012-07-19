@@ -2,6 +2,8 @@
 #include <stdio.h>
 #include <unistd.h>
 
+#include <vector>
+
 int main(void) {
 	button_state last_state = (button_state)-1;
 	while(1) {
