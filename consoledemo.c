@@ -1,4 +1,4 @@
-#include <libemergencybutton/emergencybutton.h>
+#include "emergencybutton.h"
 #include <stdio.h>
 #include <unistd.h>
 
