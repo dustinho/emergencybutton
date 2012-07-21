@@ -5,11 +5,16 @@
 
 int main(void) {
   button_state last_state = (button_state)-1;
+  close(2);
   while(1) {
     emergencybutton_handle* dev = emergencybutton_open();
     usleep(1000);
     button_state state = emergencybutton_poll(dev);
     if (state != last_state) {
+      if (last_state == BUTTON_PRESSED && state == BUTTON_ARMED) {
+        last_state = state;
+        continue;
+      }
       last_state = state;
       switch(state) {
       case BUTTON_CLOSED:
@@ -22,6 +27,7 @@ int main(void) {
       case BUTTON_PRESSED:
 	printf("Button is pressed OH NO!\n");
 	system("cd noises; ./button_push.sh &");
+	system("cd crazytown; ./simple &");
 	system("cd irc; python yell_in_irc.py '#si' 'si_e SI IS TAKING DOWN THE SITE NOW'&");
 	break;
       }
